@@ -27,13 +27,14 @@
      <!-- <p class="login-box-msg">Datos acceso: <i>admin@test.org - test</i></p>     -->  
       <form action="/login" method="post">
         <div class="input-group mb-3">
-          <input type="text" name="username" class="form-control" placeholder="Nombre de usuario">
+            <input type="text" name="email" class="form-control" placeholder="Email: " value="<?php echo isset($email)? $email : "" ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
+        <p class="login-box-msg text-danger"><?php echo isset($errores['email'])? $errores['email'] : "" ?></p>  
         <div class="input-group mb-3">
           <input type="password" class="form-control" name="pass" placeholder="Password">
           <div class="input-group-append">
@@ -42,7 +43,8 @@
             </div>
           </div>          
         </div>           
-      <p class="login-box-msg text-danger">Datos incorrectos</p>      
+          <p class="login-box-msg text-danger"><?php echo isset($errores['pass'])? $errores['pass'] : "" ?></p>
+          <p class="login-box-msg text-danger"><?php echo isset($errores['error'])? $errores['error'] : "" ?></p>    
         <div class="row">
           <div class="col-12">            
             <button type="submit" class="btn btn-primary btn-block float-right">Acceder</button>

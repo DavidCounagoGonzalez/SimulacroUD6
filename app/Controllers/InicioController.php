@@ -8,7 +8,7 @@ class InicioController extends \Com\Daw2\Core\BaseController {
         $data = array(
             'titulo' => 'Página de inicio',
             'breadcrumb' => ['Inicio']
-        );        
+        );
         $modeloCategorias = new \Com\Daw2\Models\CategoriaModel();
         $data['numCategorias'] = $modeloCategorias->size();
         
@@ -41,5 +41,33 @@ class InicioController extends \Com\Daw2\Core\BaseController {
 
     public function demoLogin(){
         $this->view->show('login.view.php');
+    }
+    
+    public function mostrarLogin() {
+        if(isset($_SESSION['usuario'])){
+            header('location: /');
+        }else{
+            $this->view->show('login.view.php');
+        }
+    }
+    
+    public function procesarLogin() {
+        $errores = $this->checkLogin($_POST);
+        if(count($errores) <= 0){
+            
+        }
+    }
+    
+    
+    private function checkLogin($datos) {
+        $errores = [];
+        if(empty($datos['email'])){
+            $errores['email'] = "Debe indicar un email válido";
+        }
+        if(empty($datos['pass'])){
+            $errores['pass'] = "Contraseña incorrecta";
+        }
+        
+        return $errores;
     }
 }
