@@ -1,6 +1,8 @@
 <div class="row">       
     <div class="col-12">
-        <div class="alert alert-warning"><p>No está permitido darse de baja a uno mismo.</p></div>
+        <?php if(isset($_SESSION['mensaje'])){ ?>
+        <div class="alert alert-<?php echo $_SESSION['mensaje']['class']; ?>"><p> <?php echo $_SESSION['mensaje']['texto']; ?></p></div>
+        <?php } ?>
     </div>
     <div class="col-12">
         <div class="card shadow mb-4">

@@ -95,7 +95,7 @@
         </div>
         <div class="info">
           <a href="#"
-                class="d-block"> <i>Sin establecer</i> </a>    
+                class="d-block"> <?php echo isset($_SESSION['usuario']['username']) ? $_SESSION['usuario']['username'] : '<i>Sin establecer</i>' ;?></a>    
         </div>
       </div>
      

@@ -41,6 +41,17 @@ class UsuariosSistemaModel extends \Com\Daw2\Core\BaseModel{
         }
     }
     
+    public function loadByUsername($username) {
+        $query = "SELECT * FROM usuario_sistema WHERE username = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$username]);
+        if($row = $stmt->fetch()){
+            return $row;
+        }else{
+            return null;
+        }
+    }
+    
     public function darBaja($id_usuario, $baja) {
         $query = 'UPDATE usuario_sistema SET baja = ? WHERE id_usuario = ?';
         $stmt = $this->pdo->prepare($query);
@@ -50,5 +61,17 @@ class UsuariosSistemaModel extends \Com\Daw2\Core\BaseModel{
             return false;
         }
     }
+    
+    public function ultimoLogin($id_usuario) {
+        $query = "UPDATE usuario_sistema SET last_date=NOW() WHERE id_usuario=?";
+        $stmt = $this->pdo->prepare($query);
+        if($stmt->execute([$id_usuario]) && $stmt->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
 
 }

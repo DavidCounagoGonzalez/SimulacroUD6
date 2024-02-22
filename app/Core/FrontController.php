@@ -37,6 +37,27 @@ class FrontController {
                 }
                 , 'get');
                 
+        Route::add('/demos/usuarios-sistema',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\InicioController();
+                    $controlador->demoUsuariosSistema();
+                }
+                , 'get');        
+                
+        Route::add('/demos/usuarios-sistema/add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\InicioController();
+                    $controlador->demoUsuariosSistemaAdd();
+                }
+                , 'get'); 
+                
+        Route::add('/demos/login',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\InicioController();
+                    $controlador->demoLogin();
+                }
+                , 'get'); 
+       
 
         # Gestion de categorías
         if (strpos($_SESSION['permisos']['categorias'], 'r') !== false) {
@@ -222,8 +243,24 @@ class FrontController {
                     $controlador->mostrarTodo();
                 }
                 , 'get');
+                
         }
-        if(strpos($_SESSION['permisos']['usuarios'], 'w') !== false){       
+        if(strpos($_SESSION['permisos']['usuarios'], 'w') !== false){
+            Route::add('/usuarios-sistema/add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->mostrarAdd();
+                }
+                , 'get');
+
+        Route::add('/usuarios-sistema/add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->add();
+                }
+                , 'post');
+        }
+        if(strpos($_SESSION['permisos']['usuarios'], 'd') !== false){       
         Route::add('/usuarios-sistema/baja/([0-9]+)',
                 function ($id) {
                     $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
